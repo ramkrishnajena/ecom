@@ -1,14 +1,12 @@
 import ImgElement from "./ImgElement";
 import { useState } from "react";
+import { discountPercent } from "../utils/constants";
 
 const Product = (props) => {
   const { title, images, description, price, discountPercentage, rating } =
     props;
   const [imgHover, setImgHover] = useState(false);
-  const discountPercent = (price, discount) => {
-    const a = price + (price * discount) / 100;
-    return Math.round(a);
-  };
+
   const showPopup = () => setImgHover(!imgHover);
   return (
     <div className='w-4/12 min-h-[30rem] items-center justify-center flex flex-col shadow-md flex-1 relative'>

@@ -1,4 +1,8 @@
 export const API_URL = "https://dummyjson.com/";
+export const discountPercent = (price, discount) => {
+  const a = price + (price * discount) / 100;
+  return Math.round(a);
+};
 
 export const callApi = async (path_name) => {
   try {

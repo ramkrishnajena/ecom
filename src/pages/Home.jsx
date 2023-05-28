@@ -3,24 +3,10 @@ import appreal from "../assets/appereal.jpg";
 import electronics from "../assets/electronics.jpg";
 import { useEffect } from "react";
 import Product from "../components/Product";
-import { callApi } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { callProducts } from "../utils/store/productSlice";
-import { callProductsCategories } from "../utils/store/categoriesSlice";
-import { setUser } from "../utils/store/UserSlice";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { products } = useSelector((store) => store.products);
-  const dispatch = useDispatch();
-  const token = localStorage.getItem("token");
-  const data = token;
-  console.log(data);
-
-  useEffect(() => {
-    dispatch(callProducts());
-    dispatch(callProductsCategories());
-    token && dispatch(setUser(token));
-  }, []);
 
   return (
     <div className='w-full flex flex-col'>

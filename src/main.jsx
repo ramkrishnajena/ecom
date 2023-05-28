@@ -9,6 +9,8 @@ import Products from "./pages/Products";
 import Checkout from "./pages/Checkout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Categories from "./pages/Categories.jsx";
+import { Provider } from "react-redux";
+import store from "./utils/store/store.js";
 
 const MainRoute = createBrowserRouter([
   {
@@ -45,5 +47,7 @@ const MainRoute = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={MainRoute} />
+  <Provider store={store}>
+    <RouterProvider router={MainRoute} />
+  </Provider>
 );

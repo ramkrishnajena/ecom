@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../utils/store/UserSlice";
+import UserMenu from "./UserMenu";
 
 const Header = () => {
   const [menus, setMenus] = useState([]);
@@ -43,6 +44,7 @@ const Header = () => {
             </p>
           )}
         </div>
+        <UserMenu />
       </div>
       <div className='w-full px-2 max-w-fit flex gap-2 items-center justify-items-start overflow-scroll no-scrollbar my-3 cursor-pointer whitespace-nowrap '>
         {category.categories.map((data) => (
