@@ -1,35 +1,69 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [input, setInput] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
+    username: "",
     email: "",
     password: "",
   });
-  console.log(input);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const call = await fetch("https://dummyjson.com/users/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...input,
+        }),
+      });
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className='w-full h-5/6 flex items-center justify-center my-5'>
       <form
-        className='w-4/12 flex flex-col items-center justify-center gap-2 border shadow-lg p-16 bg-white'
+        className='md:w-4/12 sm:8/12 flex flex-col items-center justify-center gap-2 border shadow-lg p-16 bg-white'
         method='post'
         onSubmit={handleSubmit}
       >
         <h2 className='text-3xl'>Signup</h2>
         <div className='flex w-5/6 font-popins flex-col'>
-          <p className='text-lg'>Full Name</p>
+          <p className='text-lg'>First Name</p>
           <input
             type='text'
             className='border-b-2'
-            name='name'
-            value={input.name}
+            name='firstName'
+            value={input.firstName}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='flex w-5/6 font-popins flex-col'>
+          <p className='text-lg'>Last Name</p>
+          <input
+            type='text'
+            className='border-b-2'
+            name='lastName'
+            value={input.lastName}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='flex w-5/6 font-popins flex-col'>
+          <p className='text-lg'>Username</p>
+          <input
+            type='text'
+            className='border-b-2'
+            name='username'
+            value={input.username}
             onChange={handleChange}
           />
         </div>

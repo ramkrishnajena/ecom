@@ -1,10 +1,11 @@
-import React from "react";
-
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../utils/store/UserSlice";
 
 const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   const {
     user: { user },
   } = useSelector((store) => store);
@@ -15,7 +16,7 @@ const UserMenu = () => {
   return (
     <div className='px-3'>
       <img
-        className='w-16 h-16 rounded-full bg-center bg-amber-400 flex items-center justify-center font-roboto font-semibold relative bg-contain'
+        className='w-14 h-14 rounded-full bg-amber-400 flex items-center justify-center font-roboto font-semibold relative border-2 border-white'
         src={user.image}
         onClick={() => setIsOpen(!isOpen)}
       ></img>
@@ -25,9 +26,26 @@ const UserMenu = () => {
             className='font-popins cursor-pointer text-lg text-center underline-offset-4 uppercase first:text-red'
             onClick={() => setIsOpen(false)}
           >
-            <li>My Profile</li>
-            <li>Orders</li>
-            <li>Cart</li>
+            <li>
+              <Link to='/in/my-profile'>My Profile</Link>
+            </li>
+            <li>
+              <Link to='/in/orders'>Orders</Link>
+            </li>
+            <li>
+              <Link to='/cart'>Cart</Link>
+            </li>
+            <li>
+              <Link
+                to='/'
+                onClick={() => {
+                  dispatch(setUser({}));
+                  localStorage.clear();
+                }}
+              >
+                Logout
+              </Link>
+            </li>
           </ul>
         </div>
       )}
@@ -36,29 +54,3 @@ const UserMenu = () => {
 };
 
 export default UserMenu;
-
-// {email
-// :
-// "kminchelle@qq.com"
-// firstName
-// :
-// "Jeanne"
-// gender
-// :
-// "female"
-// id
-// :
-// 15
-// image
-// :
-// "https://robohash.org/autquiaut.png"
-// lastName
-// :
-// "Halvorson"
-// token
-// :
-// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoia21pbmNoZWxsZSIsImVtYWlsIjoia21pbmNoZWxsZUBxcS5jb20iLCJmaXJzdE5hbWUiOiJKZWFubmUiLCJsYXN0TmFtZSI6IkhhbHZvcnNvbiIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9yb2JvaGFzaC5vcmcvYXV0cXVpYXV0LnBuZyIsImlhdCI6MTY4NTI2MDA3NSwiZXhwIjoxNjg1MjYzNjc1fQ.W1j4-3jpEVXBOxUviML9DqG0rtdkVUj5MCMi6FrWzEI"
-// username
-// :
-// "kminchelle"
-// }

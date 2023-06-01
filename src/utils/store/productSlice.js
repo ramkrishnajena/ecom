@@ -17,14 +17,31 @@ const productSlice = createSlice({
   name: "Products",
   initialState: {
     products: {},
+    cart: [],
   },
-  reducers: {},
+  reducers: {
+    addToCart: (state, action) => {
+      state.cart.push(action.payload);
+    },
+    removeFromCart: (state, action) => {
+      state.cart.splice(action.payload, 1);
+    },
+    countProductQuantity: (state, action) => {
+      const products = {};
+      let q = 1;
+      for (let items of state.cart) {
+        products[items.id] = products[items.id]
+          ? state.cart.push({ ...items, quantity: q++ })
+          : state.cart.push({ ...items, quantity: 1 });
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(callProducts.fulfilled, (state, action) => {
       state.products = action.payload;
     });
   },
 });
-// callProducts("/products");
 
+export const { addToCart, removeFromCart } = productSlice.actions;
 export default productSlice.reducer;

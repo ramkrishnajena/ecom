@@ -13,3 +13,14 @@ export const callApi = async (path_name) => {
     console.log(error);
   }
 };
+
+export const countCart = (cart) => {
+  const products = {};
+  let q = 0;
+  for (let items of cart) {
+    products[items.id] = products[items.id]
+      ? { ...items, quantity: q++ }
+      : { ...items, quantity: 1 };
+  }
+  return products;
+};

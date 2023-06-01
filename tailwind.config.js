@@ -8,6 +8,7 @@ export default {
         popins: ["Poppins", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
       },
+      screens: { sm: "300px" },
     },
   },
   plugins: [],

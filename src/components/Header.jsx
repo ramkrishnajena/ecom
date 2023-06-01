@@ -14,10 +14,12 @@ const Header = () => {
 
   return (
     <header className='flex flex-col items-center justify-center'>
-      <div className='w-full h-20 bg-orange-500 flex items-center justify-between px-10'>
-        <p className='text-2xl w-4/12'>Logo</p>
-        <div className='w-8/12 flex gap-5  items-center'>
-          <div className='w-full h-10 flex items-center'>
+      <div className='w-full h-20  bg-orange-500 flex items-center justify-between px-10'>
+        <p className='text-2xl w-4/12'>
+          <Link to='/'>Logo</Link>
+        </p>
+        <div className='w-8/12 flex gap-5  items-center justify-end'>
+          <div className='w-full h-10 flex items-center sm:hidden md:flex'>
             <input
               type='text'
               className='bg-transparent border w-full border-white rounded-l-lg h-full px-5 text-white'
@@ -27,22 +29,17 @@ const Header = () => {
               Search
             </button>
           </div>
-          {!user.user.firstName ? (
+          {!user.user.firstName && (
             <Link
               to='login'
               className='text-xl border border-white px-2 py-1 text-white font-semibold rounded-md cursor-pointer'
             >
               Login
             </Link>
-          ) : (
-            <p
-              to='login'
-              className='text-xl border border-white px-2 py-1 text-white font-semibold rounded-md cursor-pointer'
-              onClick={handleLogout}
-            >
-              Logout
-            </p>
           )}
+          <Link to='cart' className='text-white font-roboto'>
+            Cart
+          </Link>
         </div>
         <UserMenu />
       </div>

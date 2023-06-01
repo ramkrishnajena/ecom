@@ -12,7 +12,7 @@ const Login = () => {
     username: "",
     password: "",
   });
-  console.log(input);
+
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -45,7 +45,7 @@ const Login = () => {
   return (
     <div className='w-full h-5/6 flex flex-col items-center justify-center my-5 '>
       <form
-        className='w-4/12 flex flex-col items-center justify-center gap-2 border shadow-lg p-16 bg-white'
+        className='md:w-4/12 sm:8/12 flex flex-col items-center justify-center gap-2 border shadow-lg p-16 bg-white'
         method='post'
         onSubmit={handleSubmit}
       >

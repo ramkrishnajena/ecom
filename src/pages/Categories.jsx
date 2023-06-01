@@ -1,13 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { discountPercent } from "../utils/constants";
+import { addToCart, removeFromCart } from "../utils/store/productSlice";
 
 const Categories = () => {
   const param = useParams();
-  const { products } = useSelector((store) => store);
+  const dispatch = useDispatch();
+  const {
+    products: { products, cart },
+  } = useSelector((store) => store);
 
-  const filteredCategory = Object.values(products.products).filter((data) => {
+  const filteredCategory = Object.values(products).filter((data) => {
     return data.category == param.id;
   });
   return (
@@ -27,26 +31,45 @@ const Categories = () => {
             </Link>
           </p>
         ) : (
-          filteredCategory.map((data) => (
-            <div className=' h-60 flex gap-4 border-4 relative' key={data.id}>
-              <img src={data.images[0]} alt={data.title} className='w-2/5' />
+          filteredCategory.map((item) => (
+            <div className=' h-60 flex gap-4 border-4 relative' key={item.id}>
+              <img
+                src={item.images[0]}
+                alt={item.title}
+                className='w-2/5 object-cover'
+              />
               <p className='absolute bg-orange-600 p-1 -left-3 top-1 text-white font-lato uppercase'>
-                {data.category}
+                {item.category}
               </p>
 
               <div className='flex flex-col justify-around'>
-                <p className='text-2xl font-popins'>{data.title}</p>
-                <p className='text-2xl font-semibold'>₹ {data.price}</p>
-                <p className='w-56 text-xl font-sans border text-center bg-yellow-300'>
+                <p className='text-2xl font-popins'>{item.title}</p>
+                <p className='text-2xl font-semibold'>₹ {item.price}</p>
+                <p className='w-12/12 text-xl font-sans border text-center bg-yellow-300'>
                   ₹
                   <span className='line-through'>
-                    {discountPercent(data.price, data.discountPercentage)}
+                    {discountPercent(item.price, item.discountPercentage)}
                   </span>
                   <span className='px-5 text-red-900'>
-                    {data.discountPercentage}% OFF
+                    {item.discountPercentage}% OFF
                   </span>
                 </p>
-                <button className='w-72 bg-blue-800 p-3 text-white font-roboto font-extrabold'>
+
+                <div className='flex font-roboto gap-3 text-2xl cursor-pointer'>
+                  <p onClick={() => dispatch(addToCart(item))}>+</p>
+                  <p>{cart.filter((obj) => obj.id == item.id).length}</p>
+                  <p
+                    onClick={() => {
+                      dispatch(removeFromCart(cart.indexOf(item, 0)));
+                    }}
+                  >
+                    -
+                  </p>
+                </div>
+                <button
+                  className='w-8/12 bg-blue-800 p-3 text-white font-roboto font-extrabold'
+                  onClick={() => dispatch(addToCart(item))}
+                >
                   Add to Cart
                 </button>
               </div>
