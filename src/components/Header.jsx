@@ -14,9 +14,11 @@ const Header = () => {
 
   return (
     <header className='flex flex-col items-center justify-center'>
-      <div className='w-full h-20  bg-orange-500 flex items-center justify-between px-10'>
-        <p className='text-2xl w-4/12'>
-          <Link to='/'>Logo</Link>
+      <div className='w-full h-20 bg-orange-500 flex items-center justify-between px-10'>
+        <p className='w-4/12 font-roboto text-3xl font-bold text-white'>
+          <Link to='/' className='outline p-1'>
+            E-COM
+          </Link>
         </p>
         <div className='w-8/12 flex gap-5  items-center justify-end'>
           <div className='w-full h-10 flex items-center sm:hidden md:flex'>
